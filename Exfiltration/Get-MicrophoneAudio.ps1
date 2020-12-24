@@ -98,7 +98,7 @@ Records 10 seconds of audio to the path C:\windows\temp\secret.wav using WinMM a
 		$UnsafeNativeMethods = $SystemAssembly.GetType('Microsoft.Win32.UnsafeNativeMethods')
 		# Get a reference to the GetModuleHandle and GetProcAddress methods
 		$GetModuleHandle = $UnsafeNativeMethods.GetMethod('GetModuleHandle')
-		$GetProcAddress = $UnsafeNativeMethods.GetMethod('GetProcAddress')
+		$GetProcAddress = $UnsafeNativeMethods.GetMethod('GetProcAddress', [reflection.bindingflags] "Public,Static", $null, [System.Reflection.CallingConventions]::Any, @((New-Object System.Runtime.InteropServices.HandleRef).GetType(), [string]), $null);
 		# Get a handle to the module specified
 		$Kern32Handle = $GetModuleHandle.Invoke($null, @($Module))
 		$tmpPtr = New-Object IntPtr
